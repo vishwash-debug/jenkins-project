@@ -2,7 +2,7 @@ pipeline {
     agent { label "${AGENT_LABEL}"}
 
     environment {
-        IMAGE_NAME = "netapp"
+        IMAGE_NAME = "netapp1"
         IMAGE_TAG  = "${BUILD_NUMBER}"
         DOCKER_IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
     }
