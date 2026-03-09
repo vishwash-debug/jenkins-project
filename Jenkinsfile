@@ -11,7 +11,7 @@ pipeline {
 
         stage('CODE') {
             steps {
-                git url:https://github.com/vishwash-debug/jenkins-project.git, branch:"main"
+                git url: 'https://github.com/vishwash-debug/jenkins-project.git', branch: 'main'
             }
         }
 
