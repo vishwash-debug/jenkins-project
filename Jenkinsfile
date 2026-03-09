@@ -1,5 +1,5 @@
 pipeline {
-    agent { label "${AGENT_LABEL}"}
+    agent { label "${AGENT_LABEL}" }
 
     environment {
         IMAGE_NAME = "netapp1"
@@ -17,17 +17,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                    sh 'docker build -t ${DOCKER_IMAGE} .'
-                }
+                sh 'docker build -t ${DOCKER_IMAGE} .'
             }
+        }
 
         stage('Deploy') {
             steps {
-                    sh """
-                      docker stop net1 || true
-                      docker rm net1 || true
-                      docker run -d --name net1 -p 80:80 --restart always ${DOCKER_IMAGE}
-                    """
-                }
+                sh """
+                docker stop net1 || true
+                docker rm net1 || true
+                docker run -d --name net1 -p 80:80 --restart always ${DOCKER_IMAGE}
+                """
+            }
         }
+
     }
+}
