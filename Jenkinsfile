@@ -1,5 +1,5 @@
 pipeline {
-    agent { label "${AGENT_LABEL}" }
+    agent any
 
     environment {
         IMAGE_NAME = "netapp1"
