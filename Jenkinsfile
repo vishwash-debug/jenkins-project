@@ -9,10 +9,10 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy using Ansible') {
             steps {
                 sh '''
-                ansible-playbook -i ansidocker/hosts.ini ansidocker/deploy.yml
+                /usr/bin/ansible-playbook -i ansidocker/hosts.ini ansidocker/deploy.yml
                 '''
             }
         }
