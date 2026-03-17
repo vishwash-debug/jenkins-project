@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'master' }
 
     stages {
 
@@ -12,7 +12,7 @@ pipeline {
         stage('Deploy using Ansible') {
             steps {
                 sh '''
-                /usr/bin/ansible-playbook -i ansidocker/hosts.ini ansidocker/deploy.yml
+                ansible-playbook -i ansidocker/hosts.ini ansidocker/deploy.yml
                 '''
             }
         }
