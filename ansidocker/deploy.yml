@@ -4,40 +4,28 @@
   become: true
 
   vars:
-    image_name: myapp
-    image_tag: latest
-    container_name: myapp-container
-    container_port: 8080
-    host_port: 8080
+    app_dir: /home/ubuntu/app
 
   tasks:
 
+    - name: Create app directory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+
+    - name: Copy project files to remote server
+      copy:
+        src: "{{ playbook_dir }}/../"
+        dest: "{{ app_dir }}"
+
     - name: Build Docker image
-      docker_image:
-        name: "{{ image_name }}"
-        tag: "{{ image_tag }}"
-        build:
-          path: "{{ playbook_dir }}/.."
-        source: build
-        force_source: yes
+      command: docker build -t myapp .
+      args:
+        chdir: "{{ app_dir }}"
 
-    - name: Stop existing container
-      docker_container:
-        name: "{{ container_name }}"
-        state: stopped
-      ignore_errors: true
+    - name: Stop old container
+      command: docker rm -f myapp-container
+      ignore_errors: yes
 
-    - name: Remove existing container
-      docker_container:
-        name: "{{ container_name }}"
-        state: absent
-      ignore_errors: true
-
-    - name: Run new container
-      docker_container:
-        name: "{{ container_name }}"
-        image: "{{ image_name }}:{{ image_tag }}"
-        state: started
-        restart_policy: always
-        ports:
-          - "{{ host_port }}:{{ container_port }}"
+    - name: Run container
+      command: docker run -d -p 8080:8080 --name myapp-container myapp
