@@ -1,35 +1,20 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "netapp1"
-        IMAGE_TAG  = "${BUILD_NUMBER}"
-        DOCKER_IMAGE = "${IMAGE_NAME}:${IMAGE_TAG}"
-    }
-
     stages {
 
-        stage('CODE') {
+        stage('Clone Code') {
             steps {
                 git url: 'https://github.com/vishwash-debug/jenkins-project.git', branch: 'main'
             }
         }
 
-        stage('Build') {
+        stage('Deploy using Ansible') {
             steps {
-                sh 'docker build -t ${DOCKER_IMAGE} .'
+                sh '''
+                ansible-playbook -i ansidocker/hosts.ini ansidocker/deploy.yml
+                '''
             }
         }
-
-        stage('Deploy') {
-            steps {
-                sh """
-                docker stop net1 || true
-                docker rm net1 || true
-                docker run -d --name net1 -p 80:80 --restart always ${DOCKER_IMAGE}
-                """
-            }
-        }
-
     }
 }
