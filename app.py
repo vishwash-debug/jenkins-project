@@ -1,16 +1,31 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from flask import Flask, render_template
 
-class Handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(b"Hello from Docker + Jenkins + Ansible!")
+app = Flask(__name__)
 
-def run():
-    server = HTTPServer(("0.0.0.0", 8080), Handler)
-    print("Server running on port 8080...")
-    server.serve_forever()
+restaurants = [
+    {
+        "name": "Spicy Biryani House",
+        "rating": 4.5,
+        "food": "Biryani",
+        "image": "https://source.unsplash.com/300x200/?biryani"
+    },
+    {
+        "name": "Pizza Corner",
+        "rating": 4.2,
+        "food": "Pizza",
+        "image": "https://source.unsplash.com/300x200/?pizza"
+    },
+    {
+        "name": "Burger King Style",
+        "rating": 4.0,
+        "food": "Burger",
+        "image": "https://source.unsplash.com/300x200/?burger"
+    }
+]
+
+@app.route("/")
+def home():
+    return render_template("index.html", restaurants=restaurants)
 
 if __name__ == "__main__":
-    run()
+    app.run(host="0.0.0.0", port=8080)
