@@ -1,5 +1,9 @@
 pipeline {
-    agent { label 'built-in' }
+    agent any
+
+    tools {
+        ansible 'ansible'   // configure this in Jenkins global tools
+    }
 
     stages {
 
@@ -9,11 +13,14 @@ pipeline {
             }
         }
 
-        stage('Deploy using Ansible') {
+        stage('Deploy using Ansible Plugin') {
             steps {
-                sh '''
-                ansible-playbook -i ansidocker/hosts.ini ansidocker/deploy.yml
-                '''
+                ansiblePlaybook(
+                    playbook: 'ansidocker/deploy.yml',
+                    inventory: 'ansidocker/hosts.ini',
+                    credentialsId: 'ssh-key-id',
+                    disableHostKeyChecking: true
+                )
             }
         }
     }
