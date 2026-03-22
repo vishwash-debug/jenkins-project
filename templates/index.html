@@ -3,40 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zomato Clone</title>
+<title>FoodieHub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
     background: #f8f8f8;
 }
 
-/* HERO SECTION */
-.hero {
-    background: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836") center/cover no-repeat;
-    height: 400px;
-    color: white;
+/* NAVBAR */
+.navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 15px 50px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    z-index: 10;
+}
+
+.navbar h2 {
+    font-weight: 600;
+}
+
+.navbar button {
+    background: white;
+    color: red;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    height: 500px;
+    background: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836") center/cover;
+    display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+    position: relative;
 }
 
 .hero h1 {
     font-size: 60px;
-    margin: 0;
 }
 
 .search-box {
     margin-top: 20px;
     display: flex;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .search-box input {
     padding: 12px;
-    width: 250px;
     border: none;
+    width: 200px;
 }
 
 .search-box button {
@@ -48,23 +96,33 @@ body {
 
 /* SECTION */
 .section {
-    padding: 40px;
-    text-align: center;
+    padding: 50px;
 }
 
+.section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* CARDS */
 .cards {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .card {
-    background: white;
     width: 200px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+    border-radius: 15px;
     overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .card img {
@@ -75,27 +133,47 @@ body {
 
 .card p {
     padding: 10px;
-    font-weight: bold;
+    text-align: center;
 }
 
 /* RESTAURANTS */
 .restaurant {
-    width: 250px;
+    width: 260px;
+}
+
+.restaurant img {
+    height: 180px;
+}
+
+/* FOOTER */
+.footer {
+    background: black;
+    color: white;
+    padding: 30px;
+    text-align: center;
 }
 </style>
 
 </head>
 <body>
 
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>FoodieHub</h2>
+    <button>Login</button>
+</div>
+
 <!-- HERO -->
 <div class="hero">
-    <h1>Vishwash Food</h1>
-    <p>Discover the best food & drinks from Vishwash</p>
+    <div class="hero-content">
+        <h1>FoodieHub</h1>
+        <p>Discover the best food & drinks</p>
 
-    <div class="search-box">
-        <input placeholder="Location">
-        <input placeholder="Search food">
-        <button>Search</button>
+        <div class="search-box">
+            <input placeholder="Location">
+            <input placeholder="Search food">
+            <button>Search</button>
+        </div>
     </div>
 </div>
 
@@ -112,9 +190,6 @@ body {
         <div class="card"><img src="https://images.unsplash.com/photo-1604908176997-4317a7e3f8a7"><p>Non Veg</p></div>
         <div class="card"><img src="https://images.unsplash.com/photo-1625944525903-bc53ccecd3be"><p>Fish</p></div>
         <div class="card"><img src="https://images.unsplash.com/photo-1604908554000-1c7f8c4a1f1b"><p>Meat</p></div>
-        <div class="card"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19"><p>Rice</p></div>
-        <div class="card"><img src="https://images.unsplash.com/photo-1604908177257-97a3c0b8b0b5"><p>Dal</p></div>
-        <div class="card"><img src="https://images.unsplash.com/photo-1600628422019-52a4fd98b4a0"><p>Dum Biryani</p></div>
     </div>
 </div>
 
@@ -126,7 +201,7 @@ body {
 
         <div class="card restaurant">
             <img src="https://images.unsplash.com/photo-1604908176997-4317a7e3f8a7">
-            <p>Spicy Biryani House ⭐ 4.5</p>
+            <p>Spicy Biryani ⭐ 4.5</p>
         </div>
 
         <div class="card restaurant">
@@ -136,7 +211,7 @@ body {
 
         <div class="card restaurant">
             <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
-            <p>Burger King Style ⭐ 4.0</p>
+            <p>Burger King ⭐ 4.0</p>
         </div>
 
         <div class="card restaurant">
@@ -144,17 +219,12 @@ body {
             <p>Ice Cream Hub ⭐ 4.3</p>
         </div>
 
-        <div class="card restaurant">
-            <img src="https://images.unsplash.com/photo-1505253210343-d3bdfb9b6a0a">
-            <p>Sweet Chocolate Shop ⭐ 4.6</p>
-        </div>
-
-        <div class="card restaurant">
-            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb">
-            <p>Dry Fruit Store ⭐ 4.1</p>
-        </div>
-
     </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 FoodieHub | Built with DevOps 🚀</p>
 </div>
 
 </body>
