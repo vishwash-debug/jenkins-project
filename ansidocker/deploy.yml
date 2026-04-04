@@ -31,4 +31,4 @@
         chdir: "{{ app_dir }}"
 
     - name: Run container
-      command: docker run -d -p 8080:8080 --name zomato-container zomato-app
+      command: docker run -d -p 8081:8080 --name zomato-container zomato-app
