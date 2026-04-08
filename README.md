@@ -21,13 +21,10 @@ This project demonstrates a complete DevOps workflow where code is automatically
 3. Docker image is created
 4. Application deployed on AWS EC2
 
-## 📸 Screenshots
-(Add your Jenkins / Docker / AWS screenshots here)
-
 ## 🎯 Outcome
 - Reduced manual deployment effort
 - Faster and reliable deployments
 - Improved development workflow
 
 ## 📬 Connect with Me
-LinkedIn: https://www.linkedin.com/in/yourprofile
+LinkedIn: https://www.linkedin.com/in/vishwash-thakur
